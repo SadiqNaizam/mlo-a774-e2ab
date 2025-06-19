@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
 	darkMode: ["class"],
@@ -51,23 +52,18 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
-				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
 				}
+        // Removed sidebar specific colors to use main theme
 			},
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				lg: 'var(--radius)', // Will be 0.375rem (6px)
+				md: 'calc(var(--radius) - 2px)', // Will be 4px
+				sm: 'calc(var(--radius) - 4px)'  // Will be 2px
 			},
+      fontFamily: {
+        sans: ['var(--font-body)', ...defaultTheme.fontFamily.sans],
+        heading: ['var(--font-heading)', ...defaultTheme.fontFamily.sans],
+      },
 			keyframes: {
 				'accordion-down': {
 					from: {
