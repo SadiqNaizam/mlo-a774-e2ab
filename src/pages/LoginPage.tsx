@@ -11,7 +11,7 @@ import AuthFormCard from '@/components/AuthFormCard'; // Custom component
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label'; // Using Label here, can also use FormLabel from Form
+// import { Label } from '@/components/ui/label'; // Using Label here, can also use FormLabel from Form
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
@@ -47,12 +47,11 @@ const LoginPage: React.FC = () => {
     if (data.email === "user@example.com" && data.password === "password") {
       toast.success("Login successful! Redirecting to dashboard...");
       // In a real app, you would set auth tokens here
-      navigate('/dashboard'); // Path from App.tsx
+      navigate('/dashboard'); 
     } else {
       const errorMsg = "Invalid email or password. Please try again.";
       setErrorMessage(errorMsg);
-      toast.error(errorMsg);
-    }
+      toast.error(errorMsg);\n    }
   };
   
   console.log('LoginPage loaded');
@@ -68,14 +67,14 @@ const LoginPage: React.FC = () => {
           footerContent={
             <div className="text-sm text-center w-full">
               <p className="mb-2">
-                <Link to="/forgot-password" className="font-medium text-primary hover:underline"> {/* Path from App.tsx */}
+                <Link to="/forgot-password" className="font-medium text-primary hover:underline">
                   Forgot your password?
                 </Link>
               </p>
               <p>
                 Don&apos;t have an account?{' '}
-                <Link to="/registration" className="font-medium text-primary hover:underline"> {/* Path from App.tsx */}
-                  Register here
+                <Link to="/" className="font-medium text-primary hover:underline"> {/* Link to Sign Up page */}
+                  Sign up here
                 </Link>
               </p>
             </div>
@@ -110,8 +109,7 @@ const LoginPage: React.FC = () => {
                     </div>
                     <FormMessage />
                   </FormItem>
-                )}
-              />
+                )}\n              />
               <FormField
                 control={form.control}
                 name="password"
@@ -132,8 +130,7 @@ const LoginPage: React.FC = () => {
                     </div>
                     <FormMessage />
                   </FormItem>
-                )}
-              />
+                )}\n              />
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting ? "Logging in..." : "Login"}
               </Button>
