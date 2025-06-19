@@ -26,14 +26,14 @@ const formSchema = z.object({
   path: ["confirmPassword"], // Apply error to confirmPassword field
 });
 
-type RegistrationFormValues = z.infer<typeof formSchema>;
+type SignUpFormValues = z.infer<typeof formSchema>;
 
-const RegistrationPage: React.FC = () => {
-  console.log('RegistrationPage loaded');
+const SignUpPage: React.FC = () => {
+  console.log('SignUpPage loaded');
   const navigate = useNavigate();
   const [submissionError, setSubmissionError] = useState<string | null>(null);
 
-  const form = useForm<RegistrationFormValues>({
+  const form = useForm<SignUpFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
@@ -44,9 +44,9 @@ const RegistrationPage: React.FC = () => {
 
   const { formState: { isSubmitting } } = form;
 
-  const onSubmit = async (values: RegistrationFormValues) => {
+  const onSubmit = async (values: SignUpFormValues) => {
     setSubmissionError(null);
-    console.log('Registration form submitted:', values);
+    console.log('Sign up form submitted:', values);
 
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
@@ -57,8 +57,6 @@ const RegistrationPage: React.FC = () => {
         type: 'manual',
         message: 'This email address is already registered.',
       });
-      // Or set a general error:
-      // setSubmissionError("This email address is already registered. Please try another one or log in.");
       return;
     }
 
@@ -68,11 +66,11 @@ const RegistrationPage: React.FC = () => {
         return;
     }
     
-    // On successful registration
+    // On successful sign up
     toast.success("Account created successfully!", {
       description: "You can now log in with your new credentials.",
     });
-    navigate('/'); // Navigate to LoginPage (path "/" from App.tsx)
+    navigate('/login'); // Navigate to LoginPage
   };
 
   return (
@@ -80,13 +78,13 @@ const RegistrationPage: React.FC = () => {
       <Header isAuthenticated={false} />
       <main className="flex-grow">
         <AuthFormCard
-          title="Create Your Account"
+          title="Sign Up for AuthSecure"
           description="Fill in the details below to get started with AuthSecure."
           logo={<Rocket className="h-12 w-12 text-primary" />}
           footerContent={
             <p className="text-sm text-muted-foreground">
               Already have an account?{' '}
-              <Link to="/" className="font-medium text-primary hover:underline">
+              <Link to="/login" className="font-medium text-primary hover:underline">
                 Log in here
               </Link>
             </p>
@@ -97,7 +95,7 @@ const RegistrationPage: React.FC = () => {
               {submissionError && (
                 <Alert variant="destructive">
                   <AlertTriangle className="h-4 w-4" />
-                  <AlertTitle>Registration Failed</AlertTitle>
+                  <AlertTitle>Sign Up Failed</AlertTitle>
                   <AlertDescription>{submissionError}</AlertDescription>
                 </Alert>
               )}
@@ -117,8 +115,7 @@ const RegistrationPage: React.FC = () => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                )}
-              />
+                )}\n              />
               <FormField
                 control={form.control}
                 name="password"
@@ -135,8 +132,7 @@ const RegistrationPage: React.FC = () => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                )}
-              />
+                )}\n              />
               <FormField
                 control={form.control}
                 name="confirmPassword"
@@ -153,16 +149,15 @@ const RegistrationPage: React.FC = () => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                )}
-              />
+                )}\n              />
               <Button type="submit" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Creating Account...
+                    Signing Up...
                   </>
                 ) : (
-                  'Create Account'
+                  'Sign Up'
                 )}
               </Button>
             </form>
@@ -174,4 +169,4 @@ const RegistrationPage: React.FC = () => {
   );
 };
 
-export default RegistrationPage;
+export default SignUpPage;
